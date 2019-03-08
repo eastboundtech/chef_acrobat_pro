@@ -1,4 +1,3 @@
 # acrobat_pro
 
-TODO: Enter the cookbook description here.
-
+This cookbook helps to install and configure Adobe Acrobat Pro DC

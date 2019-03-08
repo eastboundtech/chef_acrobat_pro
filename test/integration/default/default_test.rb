@@ -5,14 +5,18 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
-unless os.windows?
-  # This is an example test, replace with your own test.
-  describe user('root'), :skip do
-    it { should exist }
-  end
+return unless os.windows?
+
+acrobat_path = if File.exist?('C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat')
+                 'C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat'
+               else
+                 'C:\Program Files (x86)\Adobe\Acrobat 2015\Acrobat'
+               end
+
+describe file("#{acrobat_path}\\Acrobat.exe") do
+  it { should exist }
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+describe file("#{acrobat_path}\\acrodist.exe") do
+  it { should exist }
 end
