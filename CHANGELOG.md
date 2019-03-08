@@ -6,6 +6,4 @@ This file is used to list changes made in each version of the acrobat_pro cookbo
 
 Initial release.
 
-- change 0
-- change 1
-
+- Install and configure Adobe Pro DC | Non-subscription, download here: [Acrobat DC](https://helpx.adobe.com/download-install/kb/acrobat-downloads.html)
