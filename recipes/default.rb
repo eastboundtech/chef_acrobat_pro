@@ -16,29 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-installer_options = '/sAll'
-cache_path = Chef::Config[:file_cache_path]
-archiver_path = Chef::Util::PathHelper.join(cache_path, 'Acrobat_2015_Web_WWMUI.exe')
-installer_path = Chef::Util::PathHelper.join(cache_path, 'Adobe Acrobat', 'Setup.exe')
-
-download_headers = {}
-download_headers = node['acrobat_pro']['headers']
-
-remote_file archiver_path do
-  source node['acrobat_pro']['source']
-  headers download_headers
+unless %w[sub nonsub trial].include?(node['acrobat_pro']['version'].downcase)
+  raise 'Does not support this version'
 end
 
-execute 'extract installer' do
-  command "#{archiver_path} /s /x /d #{Chef::Config[:file_cache_path]}"
-  not_if { ::File.exist?(installer_path) }
-end
-
-windows_package 'Adobe Acrobat DC (2015)' do
-  source installer_path
-  checksum node['acrobat_pro']['checksum'] if node['acrobat_pro']['checksum']
-  installer_type :custom
-  options installer_options
-  timeout node['acrobat_pro']['timeout'] if node['acrobat_pro']['timeout']
-  action :install
-end
+include_recipe "acrobat_pro::#{node['acrobat_pro']['version']}"
