@@ -7,7 +7,7 @@
 
 return unless os.windows?
 
-acrobat_path = if File.exist?('C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat')
+acrobat_path = if file('C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat').exist?
                  'C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat'
                else
                  'C:\Program Files (x86)\Adobe\Acrobat 2015\Acrobat'
